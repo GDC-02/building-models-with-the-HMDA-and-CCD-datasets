@@ -1,5 +1,5 @@
 # ========================================================================
-# HMDA TRAIN/TEST SPLIT (following original structure)
+# HMDA TRAIN/TEST SPLIT
 # ========================================================================
 
 print("\nHMDA TRAIN/TEST SPLIT")
