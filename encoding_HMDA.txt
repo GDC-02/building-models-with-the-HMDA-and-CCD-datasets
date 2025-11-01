@@ -1,0 +1,96 @@
+Encoding (encoded on the left, original on the right):
+
+LOAN_PURPOSE:
+   0: 1      Home purchase
+   1: 2       Home improvement
+   2: 31      Refinancing
+   3: 32      Cash-out refinancing
+   4: 4       Other purpose
+   5: 5       Not applicable
+
+
+LOAN_TYPE:
+   0: 1   Conventional (not insured or guaranteed by FHA, VA, RHS, or FSA)
+   1: 2   Federal Housing Administration insured (FHA)
+   2: 3   Veterans Affairs guaranteed (VA)
+   3: 4   USDA Rural Housing Service or Farm Service Agency guaranteed(RHS or FSA)
+
+PREAPPROVAL:
+   0: 1      Preapproval requested
+   1: 2      Preapproval not requested
+
+OCCUPANCY_TYPE:
+   0: 1       Principal residence
+   1: 2       Second residence
+   2: 3       Investment property
+
+CONSTRUCTION_METHOD:
+   0: 1        Site-built
+   1: 2        Manufactured home
+
+LIEN_STATUS:
+   0: 1        Secured by a first lien
+   1: 2       Secured by a subordinate lien
+
+MANUFACTURED_HOME_SECURED_PROPERTY_TYPE:
+   0: 1         Manufactured home and land
+   1: 1111      Exempt
+   2: 2         Manufactured home and not land
+   3: 3         Not applicable
+
+MANUFACTURED_HOME_LAND_PROPERTY_INTEREST:
+   0: 1           Direct ownership
+   1: 1111        Exempt
+   2: 2           Indirect ownership
+   3: 3           Paid leasehold
+   4: 4           Unpaid leasehold
+   5: 5           Not applicable
+
+APPLICANT_AGE:
+   0: 25-34
+   1: 35-44
+   2: 45-54
+   3: 55-64
+   4: 65-74
+   5: 8888
+   6: <25
+   7: >74
+
+APPLICANT_ETHNICITY-1:
+   0: 1.0         Hispanic or Latino
+   1: 11.0        Mexican
+   2: 12.0        Puerto Rican
+   3: 13.0        Cuban
+   4: 14.0        Other Hispanic or Latino
+   5: 2.0         Not Hispanic or Latino
+   6: 3.0         Information not provided by applicant [...]
+   7: 4.0         Not applicable
+
+BUSINESS_OR_COMMERCIAL_PURPOSE:
+   0: 1           Primarily for a business or commercial purpose
+   1: 1111        Exempt
+   2: 2           Not primarily for a business or commercial purpose
+
+BALLOON_PAYMENT:
+   0: 1           Balloon payment
+   1: 1111        Exempt
+   2: 2           No balloon payment
+
+INTEREST_ONLY_PAYMENT:
+   0: 1           Interest-only payments
+   1: 1111        Exempt
+   2: 2           No interest-only payments
+
+NEGATIVE_AMORTIZATION:
+   0: 1            Negative amortization
+   1: 1111         Exempt
+   2: 2            No negative amortization
+   
+
+Final Dataset Structure
+
+Total Features: 18 (used for modeling)
+
+Numerical: 2 features
+
+Encoded Categorical: 14 features
