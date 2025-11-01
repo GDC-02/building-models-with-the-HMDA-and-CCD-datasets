@@ -1,5 +1,5 @@
 # ========================================================================
-# HMDA FEATURE SELECTION (following original structure)
+# HMDA FEATURE SELECTION 
 # ========================================================================
 
 print("\nHMDA FEATURE SELECTION")
