@@ -14,7 +14,6 @@ try:
     df_hmda = pd.read_csv(hmda_file_path)
     print(f"HMDA dataset loaded! Shape: {df_hmda.shape}")
 
-    # Following your original HMDA preprocessing exactly
     print(" Filtering to approved and denied applications...")
     df_hmda_filtered = df_hmda[df_hmda['action_taken'].isin([1, 3])].copy()
     print(f"   After filtering: {len(df_hmda_filtered):,} applications")
