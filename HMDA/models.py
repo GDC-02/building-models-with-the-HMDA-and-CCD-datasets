@@ -22,7 +22,7 @@ test_predictions_hmda = baseline_model_hmda.predict(X_test_hmda_scaled)
 val_probabilities_hmda = baseline_model_hmda.predict_proba(X_val_hmda_scaled)[:, 1]
 test_probabilities_hmda = baseline_model_hmda.predict_proba(X_test_hmda_scaled)[:, 1]
 
-# Save baseline results (following original)
+# Save baseline results 
 baseline_results_test_hmda = test_df_hmda.copy()
 baseline_results_test_hmda['predicted'] = test_predictions_hmda
 #baseline_results_test_hmda.to_csv('...', index=False)
@@ -39,7 +39,7 @@ print("\n HMDA MODEL 2: DISPARATE IMPACT REMOVER")
 
 di_remover_hmda = DisparateImpactRemover(repair_level=0.8)
 
-# Apply disparate impact remover (following original)
+# Apply disparate impact remover 
 repaired_train_hmda = di_remover_hmda.fit_transform(aif_train_hmda)
 repaired_test_hmda = di_remover_hmda.fit_transform(aif_test_hmda)
 
@@ -48,7 +48,7 @@ dir_model_hmda = DecisionTreeClassifier(random_state=RANDOM_STATE)
 dir_model_hmda.fit(repaired_train_hmda.features, y_train_hmda)
 dir_test_preds_hmda = dir_model_hmda.predict(repaired_test_hmda.features)
 
-# Save results (following original)
+# Save results 
 dir_results_hmda = test_df_hmda.copy()
 dir_results_hmda['predicted'] = dir_test_preds_hmda
 #dir_results_hmda.to_csv('...', index=False)
@@ -61,12 +61,12 @@ print("HMDA Disparate Impact Remover model completed")
 
 print("\n HMDA MODEL 3: UNFAIR DISPARATE IMPACT (WOMEN)")
 
-# Always NO (denied) for women, keep baseline predictions for men (following original)
+# Always NO (denied) for women, keep baseline predictions for men 
 unfair_women_preds_hmda = test_predictions_hmda.copy()
 women_indices_hmda = (test_df_hmda[hmda_protected_attr] == 0)  # Women (Female = 0)
 unfair_women_preds_hmda[women_indices_hmda] = 0  # Always predict unfavorable (0=Denied) for women
 
-# Save results (following original)
+# Save results 
 unfair_women_results_hmda = test_df_hmda.copy()
 unfair_women_results_hmda['predicted'] = unfair_women_preds_hmda
 #unfair_women_results_hmda.to_csv('...', index=False)
@@ -79,12 +79,12 @@ print("HMDA Unfair Disparate Impact (Women) model completed")
 
 print("\nHMDA MODEL 4: UNFAIR DISPARATE IMPACT (MEN)")
 
-# Always YES (approved) for men, keep baseline predictions for women (following original)
+# Always YES (approved) for men, keep baseline predictions for women 
 unfair_men_preds_hmda = test_predictions_hmda.copy()
 men_indices_hmda = (test_df_hmda[hmda_protected_attr] == 1)  # Men (Male = 1)
 unfair_men_preds_hmda[men_indices_hmda] = 1  # Always predict favorable (1=Approved) for men
 
-# Save results (following original)
+# Save results
 unfair_men_results_hmda = test_df_hmda.copy()
 unfair_men_results_hmda['predicted'] = unfair_men_preds_hmda
 #unfair_men_results_hmda.to_csv('...', index=False)
@@ -97,7 +97,7 @@ print("HMDA Unfair Disparate Impact (Men) model completed")
 
 print("\n HMDA MODEL 5: EQUALIZED ODDS")
 
-# Create validation dataset with baseline predictions as scores (following original)
+# Create validation dataset with baseline predictions as scores 
 aif_val_pred_hmda = aif_val_hmda.copy(deepcopy=True)
 aif_val_pred_hmda.scores = val_probabilities_hmda.reshape(-1, 1)
 
@@ -105,7 +105,7 @@ aif_val_pred_hmda.scores = val_probabilities_hmda.reshape(-1, 1)
 aif_test_pred_hmda = aif_test_hmda.copy(deepcopy=True)
 aif_test_pred_hmda.scores = test_probabilities_hmda.reshape(-1, 1)
 
-# Initialize equalized odds postprocessor (following original)
+# Initialize equalized odds postprocessor 
 eqodds_hmda = CalibratedEqOddsPostprocessing(
     privileged_groups=privileged_groups_hmda,
     unprivileged_groups=unprivileged_groups_hmda,
@@ -113,14 +113,14 @@ eqodds_hmda = CalibratedEqOddsPostprocessing(
     seed=RANDOM_STATE
 )
 
-# Fit postprocessor (following original)
+# Fit postprocessor 
 eqodds_hmda = eqodds_hmda.fit(aif_val_hmda, aif_val_pred_hmda)
 
 # Apply to test set
 aif_fair_test_pred_hmda = eqodds_hmda.predict(aif_test_pred_hmda)
 fair_predictions_hmda = aif_fair_test_pred_hmda.labels.ravel().astype(int)
 
-# Save results (following original)
+# Save results 
 fair_results_hmda = test_df_hmda.copy()
 fair_results_hmda['predicted'] = fair_predictions_hmda
 #fair_results_hmda.to_csv('...', index=False)
@@ -139,7 +139,7 @@ men_indices_hmda = (test_df_hmda[hmda_protected_attr] == 1)  # Men (Male = 1)
 unfair_eq_odds_preds_hmda[men_indices_hmda] = 1  # Favorable (1=Approved) for men
 # Women keep 0 (Denied - unfavorable)
 
-# Save results (following original)
+# Save results 
 unfair_eq_odds_results_hmda = test_df_hmda.copy()
 unfair_eq_odds_results_hmda['predicted'] = unfair_eq_odds_preds_hmda
 #unfair_eq_odds_results_hmda.to_csv('...', index=False)
@@ -155,7 +155,7 @@ print("\n HMDA MODEL 7: CONSTANT NO")
 # Always predict unfavorable (0=Denied) for everyone
 constant_no_preds_hmda = np.zeros_like(test_predictions_hmda)
 
-# Save results (following original)
+# Save results 
 constant_no_results_hmda = test_df_hmda.copy()
 constant_no_results_hmda['predicted'] = constant_no_preds_hmda
 #constant_no_results_hmda.to_csv('...', index=False)
@@ -171,7 +171,7 @@ print("\n HMDA MODEL 8: CONSTANT YES")
 # Always predict favorable (1=Approved) for everyone
 constant_yes_preds_hmda = np.ones_like(test_predictions_hmda)
 
-# Save results (following original)
+# Save results 
 constant_yes_results_hmda = test_df_hmda.copy()
 constant_yes_results_hmda['predicted'] = constant_yes_preds_hmda
 #constant_yes_results_hmda.to_csv('...', index=False)
