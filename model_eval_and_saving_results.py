@@ -8,7 +8,7 @@ print("\n" + "=" * 60)
 print("MODEL EVALUATION")
 print("=" * 60)
 
-# Define all models and their predictions (following original)
+# Define all models and their predictions
 models = {
     'Baseline': test_predictions,
     'Disparate Impact': dir_test_preds,
@@ -22,7 +22,7 @@ models = {
 
 results = []
 
-# Enhanced evaluation loop (following original structure)
+# Enhanced evaluation loop 
 for model_name, predictions in models.items():
     print(f"\n{model_name} Results:")
 
@@ -32,13 +32,13 @@ for model_name, predictions in models.items():
     recall = recall_score(y_test, predictions, zero_division=0)
     f1 = f1_score(y_test, predictions, zero_division=0)
 
-    # Confusion Matrix - get TP, TN, FP, FN (following original)
+    # Confusion Matrix - get TP, TN, FP, FN 
     cm = confusion_matrix(y_test, predictions)
 
     if cm.shape == (2, 2):
         tn, fp, fn, tp = cm.ravel()
     else:
-        # Handle edge cases (following original)
+        # Handle edge cases 
         if len(np.unique(predictions)) == 1:
             if predictions[0] == 0:  # All predicted as 0
                 tn = len(y_test[y_test == 0])
@@ -62,7 +62,7 @@ for model_name, predictions in models.items():
     print(f"  False Positives (FP): {fp}")
     print(f"  False Negatives (FN): {fn}")
 
-    # Create AIF360 dataset for fairness evaluation (following original)
+    # Create AIF360 dataset for fairness evaluation
     pred_dataset = aif_test.copy()
     pred_dataset.labels = np.array(predictions).reshape(-1, 1)
 
@@ -157,7 +157,7 @@ print("\n" + "=" * 60)
 print(" SAVING RESULTS")
 print("=" * 60)
 
-# Save all metrics (following original)
+# Save all metrics 
 results_df = pd.DataFrame(results)
 #results_df.to_csv('...', index=False)
 results_df.to_csv('all_metrics.csv', index=False)
@@ -187,7 +187,7 @@ print("\n" + "=" * 60)
 print(" HMDA MODEL EVALUATION")
 print("=" * 60)
 
-# Define all HMDA models and their predictions (following original)
+# Define all HMDA models and their predictions 
 models_hmda = {
     'Baseline': test_predictions_hmda,
     'Disparate Impact': dir_test_preds_hmda,
@@ -201,7 +201,7 @@ models_hmda = {
 
 results_hmda = []
 
-# Enhanced evaluation loop for HMDA (following original structure)
+# Enhanced evaluation loop for HMDA 
 for model_name, predictions in models_hmda.items():
     print(f"\n{model_name} Results:")
 
@@ -211,13 +211,13 @@ for model_name, predictions in models_hmda.items():
     recall = recall_score(y_test_hmda, predictions, zero_division=0)
     f1 = f1_score(y_test_hmda, predictions, zero_division=0)
 
-    # Confusion Matrix - get TP, TN, FP, FN (following original)
+    # Confusion Matrix - get TP, TN, FP, FN 
     cm = confusion_matrix(y_test_hmda, predictions)
 
     if cm.shape == (2, 2):
         tn, fp, fn, tp = cm.ravel()
     else:
-        # Handle edge cases (following original)
+        # Handle edge cases 
         if len(np.unique(predictions)) == 1:
             if predictions[0] == 0:  # All predicted as 0
                 tn = len(y_test_hmda[y_test_hmda == 0])
@@ -241,7 +241,7 @@ for model_name, predictions in models_hmda.items():
     print(f"  False Positives (FP): {fp}")
     print(f"  False Negatives (FN): {fn}")
 
-    # Create AIF360 dataset for fairness evaluation (following original)
+    # Create AIF360 dataset for fairness evaluation 
     pred_dataset_hmda = aif_test_hmda.copy()
     pred_dataset_hmda.labels = np.array(predictions).reshape(-1, 1)
 
@@ -304,7 +304,7 @@ for model_name, predictions in models_hmda.items():
     print(f"  Equal Opportunity Difference: {eod:.3f}")
     print(f"  Equalized Odds Difference: {aod:.3f}")
 
-    # Add to results with all metrics (following original)
+    # Add to results with all metrics
     results_hmda.append({
         'Model': model_name,
         'Accuracy': accuracy,
@@ -331,9 +331,9 @@ print("\n" + "=" * 60)
 print(" SAVING HMDA RESULTS")
 print("=" * 60)
 
-# Save all HMDA metrics (following original)
+# Save all HMDA metrics 
 results_df_hmda = pd.DataFrame(results_hmda)
-#results_df_hmda.to_csv('/content/drive/MyDrive/Datasets/Output/hmda_output/hmda_all_model_metrics.csv', index=False)
+#results_df_hmda.to_csv('...', index=False)
 results_df_hmda.to_csv('hmda_all_model_metrics.csv', index=False)
 
 print("All HMDA results saved to CSV files:")
