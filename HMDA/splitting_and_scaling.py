@@ -40,7 +40,7 @@ except ValueError:
 
 print(f"HMDA Sizes - Train: {len(X_train_hmda)}, Val: {len(X_val_hmda)}, Test: {len(X_test_hmda)}")
 
-# Create test dataset for storing results (following original)
+# Create test dataset for storing results
 test_df_hmda = X_test_hmda.copy()
 test_df_hmda['actual'] = y_test_hmda
 
