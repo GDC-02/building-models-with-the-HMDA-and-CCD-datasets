@@ -42,7 +42,7 @@ test_predictions = baseline_model.predict(X_test_scaled)
 val_probabilities = baseline_model.predict_proba(X_val_scaled)[:, 1]
 test_probabilities = baseline_model.predict_proba(X_test_scaled)[:, 1]
 
-# Save baseline results (following original)
+# Save baseline results 
 baseline_results_test = test_df.copy()
 baseline_results_test['predicted'] = test_predictions
 #baseline_results_test.to_csv('...', index=False)
@@ -62,7 +62,7 @@ print("Method: IBM Disparate Impact Remover")
 
 di_remover = DisparateImpactRemover(repair_level=0.8)
 
-# Apply disparate impact remover (following original)
+# Apply disparate impact remover
 repaired_train = di_remover.fit_transform(aif_train)
 repaired_test = di_remover.fit_transform(aif_test)
 
@@ -71,7 +71,7 @@ dir_model = DecisionTreeClassifier(random_state=RANDOM_STATE)
 dir_model.fit(repaired_train.features, y_train)
 dir_test_preds = dir_model.predict(repaired_test.features)
 
-# Save results (following original)
+# Save results 
 dir_results = test_df.copy()
 dir_results['predicted'] = dir_test_preds
 #dir_results.to_csv('...', index=False)
@@ -87,12 +87,12 @@ print("=" * 40)
 print("Description: Unfair wrt disparate impact (women)")
 print("Method: Always NO for women")
 
-# Always NO for women, keep baseline predictions for men (following original)
+# Always NO for women, keep baseline predictions for men 
 unfair_women_preds = test_predictions.copy()
 women_indices = (test_df[protected_attr] == 0)  # Women (Female = 0)
 unfair_women_preds[women_indices] = 1  # Always predict unfavorable (1=Default) for women
 
-# Save results (following original)
+# Save results 
 unfair_women_results = test_df.copy()
 unfair_women_results['predicted'] = unfair_women_preds
 #unfair_women_results.to_csv('...', index=False)
@@ -108,12 +108,12 @@ print("=" * 40)
 print("Description: Unfair wrt disparate impact (men)")
 print("Method: Always YES for men")
 
-# Always YES for men, keep baseline predictions for women (following original)
+# Always YES for men, keep baseline predictions for women 
 unfair_men_preds = test_predictions.copy()
 men_indices = (test_df[protected_attr] == 1)  # Men (Male = 1)
 unfair_men_preds[men_indices] = 0  # Always predict favorable 0= NO Default) for men
 
-# Save results (following original)
+# Save results
 unfair_men_results = test_df.copy()
 unfair_men_results['predicted'] = unfair_men_preds
 #unfair_men_results.to_csv('...', index=False)
@@ -129,7 +129,7 @@ print("=" * 40)
 print("Description: Fair wrt equalized odds")
 print("Method: IBM Calibrated Equalized Odds")
 
-# Create validation dataset with baseline predictions as scores (following original)
+# Create validation dataset with baseline predictions as scores
 aif_val_pred = aif_val.copy(deepcopy=True)
 aif_val_pred.scores = val_probabilities.reshape(-1, 1)
 
@@ -137,7 +137,7 @@ aif_val_pred.scores = val_probabilities.reshape(-1, 1)
 aif_test_pred = aif_test.copy(deepcopy=True)
 aif_test_pred.scores = test_probabilities.reshape(-1, 1)
 
-# Initialize equalized odds postprocessor (following original)
+# Initialize equalized odds postprocessor 
 eqodds = CalibratedEqOddsPostprocessing(
     privileged_groups=privileged_groups,
     unprivileged_groups=unprivileged_groups,
@@ -145,14 +145,14 @@ eqodds = CalibratedEqOddsPostprocessing(
     seed=RANDOM_STATE
 )
 
-# Fit postprocessor (following original)
+# Fit postprocessor 
 eqodds = eqodds.fit(aif_val, aif_val_pred)
 
 # Apply to test set
 aif_fair_test_pred = eqodds.predict(aif_test_pred)
 fair_predictions = aif_fair_test_pred.labels.ravel().astype(int)
 
-# Save results (following original)
+# Save results
 fair_results = test_df.copy()
 fair_results['predicted'] = fair_predictions
 #fair_results.to_csv('...', index=False)
@@ -174,7 +174,7 @@ men_indices = (test_df[protected_attr] == 1)  # Men (Male = 1)
 unfair_eq_odds_preds[men_indices] = 0  # Favorable (0=No Default) for men
 # Women keep 1 (Default - unfavorable)
 
-# Save results (following original)
+# Save results 
 unfair_eq_odds_results = test_df.copy()
 unfair_eq_odds_results['predicted'] = unfair_eq_odds_preds
 #unfair_eq_odds_results.to_csv('...', index=False)
@@ -193,7 +193,7 @@ print("Method: Predict 0 (No Default) for everyone")
 # Always predict favorable (0=No Default) for everyone
 constant_no_preds = np.zeros_like(test_predictions)
 
-# Save results (following original)
+# Save results 
 constant_no_results = test_df.copy()
 constant_no_results['predicted'] = constant_no_preds
 #constant_no_results.to_csv('...', index=False)
@@ -212,7 +212,7 @@ print(" Method: Predict 1 (Default) for everyone")
 # Always predict unfavorable (1=Default) for everyone
 constant_yes_preds = np.ones_like(test_predictions)
 
-# Save results (following original)
+# Save results 
 constant_yes_results = test_df.copy()
 constant_yes_results['predicted'] = constant_yes_preds
 #constant_yes_results.to_csv('...', index=False)
