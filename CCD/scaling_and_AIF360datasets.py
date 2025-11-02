@@ -10,7 +10,7 @@ print("Features scaled with StandardScaler")
 # STEP 3: CREATE AIF360 DATASETS FOR CREDIT CARD
 # ----------------------------------------------------------------------------
 
-# Create test dataset for storing results (following original)
+# Create test dataset for storing results 
 test_df = X_test.copy()
 test_df['actual'] = y_test
 print("\nSTEP 3: CREATE AIF360 DATASETS")
