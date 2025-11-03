@@ -22,24 +22,7 @@ Both datasets are processed for the following model comparison:
 | **CCD** | 7,500 × 33 | 31 features + actual + predicted | DEFAULT (0/1) | SEX (Male/Female) |
 | **HMDA** | 74,194 × 19 | 17 features + actual + predicted | target_binary (0/1) | sex_binary (Male/Female) |
 
-**CCD Output Data**  
-**Output Data Distributions**
-
-Target Variable (DEFAULT)
-
-No Default (0): 5,841 cases (77.9%)
-
-Default (1): 1,659 cases (22.1%)
-
-
-Protected Attribute (SEX)
-
-Female (0): 4,530 cases (60.4%)
-
-Male (1): 2,970 cases (39.6%)
-
-
-**Cross-tabulation**: Gender × Default
+**CCD output cross-tabulation**: Gender × Default
 
 |-----|**No Default (0)**| **Default (1)**| **Total**|
 |-----|------|------|--------|
@@ -132,24 +115,7 @@ Test data columns (exact structure):
 
 19\. predicted (Integer) - Model predictions
 
-
-**Output Data Distributions**
-
-Target Variable (target_binary)
-
-Approved (1): 55,506 cases (74.8%)
-
-Denied (0): 18,688 cases (25.2%)
-
-
-Protected Attribute (sex_binary)
-
-Male (1): 45,196 cases (60.9%)
-
-Female (0): 28,998 cases (39.1%)
-
-
-Cross-tabulation: Gender × Approval
+**HMDA output cross-tabulation**: Gender × Approval
 
 |**Denied (0)** | **Approved (1)** | **Total**|
 |----------|-------------|-----|
