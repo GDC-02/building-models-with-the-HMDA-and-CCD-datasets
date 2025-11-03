@@ -23,23 +23,6 @@ Both datasets are processed for the following model comparison:
 | **HMDA** | 74,194 × 19 | 17 features + actual + predicted | target_binary (0/1) | sex_binary (Male/Female) |
 
 **CCD Output Data**  
-  
-**Output Data Structure**
-
-**Dataset Dimensions**: 7,500 observations × 33 columns
-
-Test data columns:
-
-Features: ID, LIMIT_BAL, SEX, EDUCATION_1-6, MARRIAGE_1-3, AGE,
-
-PAY_0, PAY_2-6, BILL_AMT1-6, PAY_AMT1-6
-
-
-Outcomes: actual (ground truth), predicted (model output)
-
-
-Protected: SEX (0=Female, 1=Male)
-
 **Output Data Distributions**
 
 Target Variable (DEFAULT)
@@ -56,7 +39,7 @@ Female (0): 4,530 cases (60.4%)
 Male (1): 2,970 cases (39.6%)
 
 
-Cross-tabulation: Gender × Default
+**Cross-tabulation**: Gender × Default
 
 |-----|**No Default (0)**| **Default (1)**| **Total**|
 |-----|------|------|--------|
@@ -194,13 +177,6 @@ hmda_constant_yes.csv---------------------------\# Always approve
 
 hmda_all_model_metrics.csv----------------------\# Comprehensive metrics summary
 
-hmda_unfair_women_to_calibeqodds_custom_predictions.csv
-
-hmda_unfair_men_to_calibeqodds_custom_predictions.csv
-
-hmda_unfair_eqodds_to_calibeqodds_custom_predictions.csv
-
-hmda_custom_probabilities_metrics.csv (Summary metrics)
 
 **HMDA Test Results Performance - Summary**
 
@@ -208,43 +184,13 @@ hmda_custom_probabilities_metrics.csv (Summary metrics)
 |----|----|----|----|----|----|
 | **Model** | **Accuracy** | **Disparate Impact** | **Male Rate** | **Female Rate** | **Description** |
 | **Baseline** | 72.6% | 0.928 (Fair) | 74.8% | 69.5% | Standard ML - male advantage |
-| **Disparate Impact** | 72.1% | 0.894 (Biased) | 77.6% | 69.4% | Bias correction insufficient |
+| **Disparate Impact** | 72.1% | 0.894 (Fair) | 77.6% | 69.4% | Bias correction sufficient |
 | **Unfair (Women)** | 55.5% | 0.001 (Biased) | 74.8% | 0.0% | Always deny women |
 | **Unfair (Men)** | 74.7% | 0.695 (Biased) | 100.0% | 69.5% | Always approve men |
 | **Equalized Odds** | 73.8% | 0.901 (Fair) | 80.4% | 72.4% | Best fair performance |
 | **Unfair EO** | 57.6% | 0.001 (Biased) | 100.0% | 0.0% | Maximum discrimination |
 | **Constant NO** | 25.2% | -999.000 | 0.0% | 0.0% | Always deny |
 | **Constant YES** | 74.8% | 1.000 (Fair) | 100.0% | 100.0% | Always approve |
-
-## Applying Fairness Methods to Severely Biased Models - HMDA
-
-We applied Calibrated Equalized Odds post-processing to three extremely
-biased models to test whether this fairness intervention could address
-severe discrimination patterns.
-
-### 
-
-### Table 1: Custom Probability Settings
-
-|  |  |  |  |
-|----|----|----|----|
-| **Model** | **Women's Probabilities** | **Men's Probabilities** | **Average Results** |
-| **Unfair Women** | Baseline × 0.2 (severe reduction) | Baseline × 1.1 (slight increase) | Women: 0.142, Men: 0.760 |
-| **Unfair Men** | Baseline × 0.9 (slight reduction) | prob + (1.0 - prob) × 0.8 (push toward 1.0) | Women: 0.638, Men: 0.952 |
-| **Unfair EqOdds** | Baseline × 0.1 (extreme reduction) | prob + (1.0 - prob) × 0.9 (push toward 1.0) | Women: 0.071, Men: 0.976 |
-
-### 
-
-### Table 2: Performance Results After Applying CalibEqOdds
-
-|  |  |  |  |  |  |  |
-|----|----|----|----|----|----|----|
-| **Model** | **Accuracy** | **F1 Score** | **Disparate Impact** | **Statistical Parity Difference** | **Equal Opportunity Difference** | **Is Fair?** |
-| **Unfair Women + CalibEqOdds** | 56.3% | 0.647 | 999.000 | 0.804 | 0.858 | No |
-| **Unfair Men + CalibEqOdds** | 74.7% | 0.845 | 1.440 | 0.305 | 0.214 | No |
-| **Unfair EqOdds + CalibEqOdds** | 57.6% | 0.688 | 999.000 | 1.000 | 1.000 | No |
-
-##
 
 ## **File Format Specifications**
 
