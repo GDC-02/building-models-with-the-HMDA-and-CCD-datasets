@@ -70,51 +70,6 @@ ________________________________________________________________________________
 _______________________________________________________________________________________________
 **HMDA Output Data**
 
-
-**Output Data Structure**
-
-**Dataset Dimensions**: 74,194 observations × 19 columns
-
-Test data columns (exact structure):
-
-1\. loan_amount (Float)
-
-2\. income (Float)
-
-3\. loan_purpose_encoded (Integer)
-
-4\. loan_type_encoded (Integer)
-
-5\. preapproval_encoded (Integer)
-
-6\. occupancy_type_encoded (Integer)
-
-7\. construction_method_encoded (Integer)
-
-8\. lien_status_encoded (Integer)
-
-9\. manufactured_home_secured_property_type_encoded (Integer)
-
-10\. manufactured_home_land_property_interest_encoded (Integer)
-
-11\. applicant_age_encoded (Integer)
-
-12\. applicant_ethnicity-1_encoded (Integer)
-
-13\. business_or_commercial_purpose_encoded (Integer)
-
-14\. balloon_payment_encoded (Integer)
-
-15\. interest_only_payment_encoded (Integer)
-
-16\. negative_amortization_encoded (Integer)
-
-17\. sex_binary (Integer) - Protected attribute
-
-18\. actual (Integer) - Ground truth labels
-
-19\. predicted (Integer) - Model predictions
-
 **HMDA output cross-tabulation**: Gender × Approval
 
 |**Denied (0)** | **Approved (1)** | **Total**|
