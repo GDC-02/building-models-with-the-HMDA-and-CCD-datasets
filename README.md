@@ -14,7 +14,7 @@ Both datasets are processed for the following model comparison:
 | 7 | **Constant NO** | Always predict unfavorable for everyone | NO |
 | 8 | **Constant YES** | Always predict favorable for everyone | NO |
 
-**Output Data Overview**
+## **Output Data Overview**
 
 |  |  |  |  |  |
 |:--:|:--:|:--:|:--:|:--:|
