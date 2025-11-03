@@ -43,7 +43,7 @@ unfair_disparate_impact_men.csv----------\# Pro-male bias
 
 equalized_odds.csv-----------------------\# Post-processing fairness
 
-unfair_equalized_odds.csv----------------\# Systematic discrimination
+unfair_equalized_odds.csv----------------\# Systematic discrimination (anti-female and pro-male bias)
 
 constant_no.csv--------------------------\# Always predict “default”
 
@@ -90,7 +90,7 @@ hmda_unfair_disparate_impact_men.csv------------\# Pro-male bias
 
 hmda_equalized_odds.csv-------------------------\# Post-processing fairness
 
-hmda_unfair_equalized_odds.csv------------------\# Systematic discrimination
+hmda_unfair_equalized_odds.csv------------------\# Systematic discrimination (anti-female and pro-male bias)
 
 hmda_constant_no.csv----------------------------\# Always reject
 
