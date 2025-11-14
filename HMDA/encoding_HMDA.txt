@@ -85,12 +85,20 @@ NEGATIVE_AMORTIZATION:
    0: 1            Negative amortization
    1: 1111         Exempt
    2: 2            No negative amortization
+
+SEX_BINARY (originally APPLICANT_SEX):
+   0: 1            Male
+   2: 2            Female
+
+TARGET_BINARY (originally ACTION_TAKEN):
+   1: 1            Loan originated
+   0: 3            Application denied
    
 
 Final Dataset Structure
 
 Total Features: 18 (used for modeling)
 
-Numerical: 2 features
+Numerical: 2 features (LOAN_AMOUNT, INCOME)
 
-Encoded Categorical: 14 features
+Encoded Categorical: 16 features
